@@ -1,0 +1,90 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SkillUp|Taken Quizzes</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<body>
+
+{% include 'nav.html' %}
+
+<div class="container mt-3" id="bc">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Taken Quizzes</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-3">
+            <div class="col-12 mb-3">
+                <div id="content-wrapper">
+                    <div class="container-fluid">
+                        <div class="container btn-cool-blues mb-3">
+                            <div class="card-header">
+                                <i class="bi bi-table text-white"></i>
+                                List of Taken Quiz
+                            </div>
+                            <div class="card-body">
+                                {% for message in messages %}
+                                    <span class="alert alert-{{ message.tags }} alert-dismissible" role="alert"> {{ message }}</span>
+                                {% endfor %}
+                                <h4>Taken quizzes: </h4>
+                                <br>
+                                <table class="table mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-white">#</th>
+                                        <th class="text-white">Quiz</th>
+                                        <th class="text-white">Score</th>
+                                        <th class="text-white"></th>
+                                        <th class="text-white">Certificate (Score has to be > 80%)</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for taken_quiz in taken_quizzes %}
+                                        <tr>
+                                            <td>{{ taken_quiz.quiz.id }}</td>
+                                            <td>{{ taken_quiz.quiz.name }}</td>
+                                            <td>{{ taken_quiz.score }}%</td>
+                                            <td><a class="btn btn-outline-info btn-cool-blues" href="{% url 'retake_quiz' taken_quiz.quiz.pk %}">Retake quiz</a></td>
+                                            {% if taken_quiz.score > 80 %}
+                                                <td><a class="btn btn-outline-info btn-cool-blues" href="{% url 'get_certificate' taken_quiz.pk%}">Certificate</a></td>
+                                            {% else %}
+                                                <td><a class="btn btn-outline-info btn-cool-blues disabled" href="">Certificate</a></td>
+                                            {% endif %}
+                                        </tr>
+                                    {% empty %}
+                                        <tr>
+                                            <td class="bg-light text-center font-italic" colspan="5">
+                                                You haven't completed any quizes yet.
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p class="navbar fixed-bottom m-0 d-flex justify-content-center small text-white shadow-lg text-shadow">Copyright © SkillUp 2022</p>
+</footer>
+
+<script type="text/javascript" src="{% static 'js/bootstrap.bundle.js' %}"></script>
+</body>
+</html>

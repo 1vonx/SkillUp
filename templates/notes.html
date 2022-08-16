@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SkillUp|Notes</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<body>
+
+{% include 'nav.html' %}
+
+<div class="container mt-3" id="bc">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Notes</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container w-100">
+    <div class="row justify-content-center">
+        <a class="btn btn-outline-info btn-cool-blues mt-3 col-2" href="{% url 'add-notes'%}"> +Note</a>
+    </div>
+</div>
+
+<div class="container w-100 justify-content-center">
+    {% if notes %}
+        <div class="row mt-3">
+        {% for note in notes %}
+                <div class="col-sm-5 col-md-6 justify-content-center">
+                    <div class="card btn-cool-blues mb-3">
+                        <div class="card-header">
+                            <span class="text-decoration-underline text-white">COURSE:</span> {{ note.course.name }}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ note.title }}</h5>
+                            <p class="card-text">{{ note.content }}</p>
+                            <a href="{% url 'note_delete' note.pk%}" class="btn btn-outline-info btn-cool-blues">Delete</a>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+        </div>
+    {% else %}
+        <div class="row justify-content-center">
+            <div class="col-10 text-center mt-5">
+                You haven't added any notes yet.
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<nav class="navbar fixed-bottom mb-3 justify-content-center" aria-label="Page navigation">
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li class="page-item disabled"><span class="paginationSpan">&laquo;</span></li>
+        {% endif %}
+
+        <span class="current paginationSpan mx-2">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <li class="page-item disabled"><span class="paginationSpan">&raquo;</span></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<footer>
+    <p class="navbar fixed-bottom m-0 d-flex justify-content-center small text-white shadow-lg text-shadow">Copyright © SkillUp 2022</p>
+</footer>
+
+<script type="text/javascript" src="{% static 'js/bootstrap.bundle.js' %}"></script>
+</body>
+</html>

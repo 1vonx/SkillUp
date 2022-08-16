@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SkillUp|Delete Note</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<body>
+
+{% include 'nav.html' %}
+
+<div class="container mt-3" id="bc">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'notes' %}">Notes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Confirm Deletion</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container justify-content-center">
+    <h2 class="mb-3">Confirm deletion</h2>
+    <p class="lead">Are you sure you want to delete this note?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, I'm sure</button>
+        <a href="{% url 'notes' %}" class="btn btn-outline-secondary" role="button">Nevermind</a>
+    </form>
+</div>
+
+<footer>
+    <p class="navbar fixed-bottom m-0 d-flex justify-content-center small text-white shadow-lg text-shadow">Copyright © SkillUp 2022</p>
+</footer>
+
+<script type="text/javascript" src="{% static 'js/bootstrap.bundle.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{% load static %}
+{% load crispy_forms_filters %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SkillUp|Login </title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<body>
+
+{% include 'nav.html' %}
+
+<div class="hero vh-100 w-100 d-flex align-items-center">
+    <div class="container" id="registerForm">
+        {% for message in messages %}
+            <span class="alert alert-{{ message.tags }} alert-dismissible" role="alert"> {{ message }}</span>
+        {% endfor %}
+        <form action="{% url 'login' %}" class="my-3" method="POST">
+            {% csrf_token %}
+            <div class="row row-cols-2 g-4 justify-content-center">
+                 <label>Username</label><br>
+                <input type="text" name="username" required style="background-color: white"><br>
+                <label>Password</label><br>
+                <input type="password" name="password" required style="background-color: white"><br>
+            </div>
+            <div class="row row-cols-2 mt-3">
+                <div class="col-12">
+                    <button class="btn btn-primary w-100 text-white" type="submit">Login</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+
+</div>
+
+<footer>
+    <p class="navbar fixed-bottom m-0 d-flex justify-content-center small text-white shadow-lg text-shadow">Copyright © SkillUp 2022</p>
+</footer>
+
+<script type="text/javascript" src="{% static 'js/bootstrap.bundle.js' %}"></script>
+</body>
+</html>
