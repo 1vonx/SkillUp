@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'skillup_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dcrcc48j2lcht8',
+        'USER': 'llzdarpeooxyim',
+        'PASSWORD': '761594dc092e4a488f18200fe99187815335bd764591814ffc2003ff5eda575c',
+        'HOST': 'ec2-3-223-242-224.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
