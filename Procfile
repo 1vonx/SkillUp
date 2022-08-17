@@ -1,1 +1,1 @@
-web:gunicorn skillup_app.wsgi
+web: gunicorn skillup_app.wsgi
