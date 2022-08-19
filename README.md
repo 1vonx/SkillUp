@@ -1,1 +1,3 @@
-# HCI Project: E-Learning System (SkillUp)
+# SkillUp
+**********
+HCI Project: E-Learning System
